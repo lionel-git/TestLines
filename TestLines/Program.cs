@@ -47,6 +47,10 @@ namespace TestLines
 
             }
 
+            // Calculer les index des points sur chaque line
+            foreach (var line in lines)
+                line.CheckPoints(points);
+
             // Selectionner 4 lignes parmi les 20 avec ordre
             // 20 * 19 * 18 * 17 = 116 280
             // generer les 20^4 cas et eliminer les doublons
@@ -66,6 +70,8 @@ namespace TestLines
             foreach (var test in testCase)
             {
                 // Tester que 2 ligne consecutives ne sont pas paralleles (le crayon ne se leve pas)
+                // surement une condition supplementaire
+                //
                 int i = test.Item1;
                 int j = test.Item2;
                 int k = test.Item3;
@@ -77,10 +83,23 @@ namespace TestLines
                 {
                     ok++;
                     // checker les points
-
-
-
-
+                    var h = new HashSet<int>();
+                    foreach (var index in lines[i].PointsOnLine)
+                        h.Add(index);
+                    foreach (var index in lines[j].PointsOnLine)
+                        h.Add(index);
+                    foreach (var index in lines[k].PointsOnLine)
+                        h.Add(index);
+                    foreach (var index in lines[l].PointsOnLine)
+                        h.Add(index);
+                    if (h.Count==9)
+                    {
+                        Console.WriteLine($"{lines[i]}");
+                        Console.WriteLine($"{lines[j]}");
+                        Console.WriteLine($"{lines[k]}");
+                        Console.WriteLine($"{lines[l]}");
+                        Console.WriteLine("===============");
+                    }
                 }
 
             }

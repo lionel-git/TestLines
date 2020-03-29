@@ -9,6 +9,8 @@ namespace TestLines
         public Point2D Direction { get; set; }
         public Point2D Origin { get; set; }
 
+        public List<int> PointsOnLine { get; set; }
+
         public Line(Point2D A, Point2D B, bool throwIfNull = true)
         {
             Direction = new Point2D(B.X - A.X, B.Y - A.Y);
@@ -23,6 +25,13 @@ namespace TestLines
             return Math.Abs(Direction.X * b.Direction.Y - b.Direction.X * Direction.Y) < 1e-5;
         }
 
+        public void CheckPoints(List<Point2D> points)
+        {
+            PointsOnLine = new List<int>();
+            for (int i = 0; i < points.Count; i++)
+                if (IsPointOnLine(points[i]))
+                    PointsOnLine.Add(i);
+        }
 
         public bool IsPointOnLine(Point2D p)
         {
