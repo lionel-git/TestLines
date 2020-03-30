@@ -22,7 +22,7 @@ namespace TestLines
 
         public bool IsParralel(Line b)
         {
-            return Math.Abs(Direction.X * b.Direction.Y - b.Direction.X * Direction.Y) < 1e-5;
+            return Math.Abs(Direction.ScalarProduct(b.Direction.Ortho())) < 1e-5;
         }
 
         public void CheckPoints(List<Point2D> points)
@@ -47,6 +47,17 @@ namespace TestLines
             }
             else
                 return false;
+        }
+
+        public Point2D Intersection(Line l2)
+        {
+            // P = O1 + l . D1
+            // l = ((O2-O1).D2o) / (D1.D2o)
+
+            var D2o = l2.Direction.Ortho();
+            var O1O2 = l2.Origin - Origin;
+            var l = O1O2.ScalarProduct(D2o) / (Direction.ScalarProduct(D2o));
+            return new Point2D(Origin.X + l * Direction.X, Origin.Y + l * Direction.Y);
         }
 
         public override string ToString()

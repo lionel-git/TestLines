@@ -69,9 +69,18 @@ namespace TestLines
             int ok = 0;
             foreach (var test in testCase)
             {
-                // Tester que 2 ligne consecutives ne sont pas paralleles (le crayon ne se leve pas)
+                // Tester que 2 lignes consecutives ne sont pas paralleles (le crayon ne se leve pas)
                 // surement une condition supplementaire
-                //
+                // Calculer les 4 'segments' suivants:
+                // ) l1    ; l1^l2 ]
+                // [ l1^l2 ; l2^l3 ]
+                // [ l2^l3 ; l3^l4 ]
+                // [ l3^l4 ; l4    (
+                // Compter le nombre de points dictincts Pi sur ces segments
+
+
+
+
                 int i = test.Item1;
                 int j = test.Item2;
                 int k = test.Item3;
@@ -98,7 +107,22 @@ namespace TestLines
                         Console.WriteLine($"{lines[j]}");
                         Console.WriteLine($"{lines[k]}");
                         Console.WriteLine($"{lines[l]}");
+                        Console.WriteLine("==");
+
+                        // Inter
+                        var p1 = lines[i].Intersection(lines[j]);
+                        var p2 = lines[j].Intersection(lines[k]);
+                        var p3 = lines[k].Intersection(lines[l]);
+                        Console.WriteLine($"{p1}");
+                        Console.WriteLine($"{p2}");
+                        Console.WriteLine($"{p3}");
                         Console.WriteLine("===============");
+
+
+
+
+
+
                     }
                 }
 

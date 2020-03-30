@@ -20,6 +20,21 @@ namespace TestLines
             Y = y;
         }
 
+        public double ScalarProduct(Point2D p)
+        {
+            return X * p.X + Y * p.Y;
+        }
+
+        public Point2D Ortho()
+        {
+            return new Point2D(-Y, X);
+        }
+
+        public static Point2D operator-(Point2D a, Point2D b)
+        {
+            return new Point2D(a.X - b.X, a.Y - b.Y);
+        }
+
         public override string ToString()
         {
             return $"{X:0.00},{Y:0.00}";
