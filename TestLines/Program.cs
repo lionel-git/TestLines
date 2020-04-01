@@ -123,20 +123,11 @@ namespace TestLines
                         h.Add(index);
                     if (h.Count==9)
                     {
-                        Console.WriteLine($"{lines[i]}");
-                        Console.WriteLine($"{lines[j]}");
-                        Console.WriteLine($"{lines[k]}");
-                        Console.WriteLine($"{lines[l]}");
-                        Console.WriteLine("==");
-
                         // Inter
                         var p1 = lines[i].Intersection(lines[j]);
                         var p2 = lines[j].Intersection(lines[k]);
                         var p3 = lines[k].Intersection(lines[l]);
-                        Console.WriteLine($"{p1}");
-                        Console.WriteLine($"{p2}");
-                        Console.WriteLine($"{p3}");
-                        Console.WriteLine("===============");
+                      
 
 
                         var h0a = Segment.ContainsPoint(p1, lines[i], true, points);
@@ -161,15 +152,21 @@ namespace TestLines
                         var htest3 = Join(h0b, hc, h3a);
                         var htest4 = Join(h0b, hc, h3b);
 
-                        if (htest1.Count == 9)
-                            Console.WriteLine("!!!!!!!!! htest1 !!!!!");
-                        if (htest2.Count == 9)
-                            Console.WriteLine("htest2");
-                        if (htest3.Count == 9)
-                            Console.WriteLine("htest3");
-                        if (htest4.Count == 9)
-                            Console.WriteLine("htest4");
+                        if (htest1.Count == 9 || htest2.Count == 9 || htest3.Count == 9 || htest4.Count == 9)
+                        {
+                            Console.WriteLine("Found");
+                            Console.WriteLine("=Lines=");
+                            Console.WriteLine($"{lines[i]}");
+                            Console.WriteLine($"{lines[j]}");
+                            Console.WriteLine($"{lines[k]}");
+                            Console.WriteLine($"{lines[l]}");
+                            Console.WriteLine("=Inter=");
+                            Console.WriteLine($"{p1}");
+                            Console.WriteLine($"{p2}");
+                            Console.WriteLine($"{p3}");
+                            Console.WriteLine("===============");
 
+                        }
                     }
                 }
 
