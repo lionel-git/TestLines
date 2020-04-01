@@ -1,10 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TestLines
 {
     class Program
     {
+
+        static HashSet<int> Join(HashSet<int> h1, HashSet<int> h2, HashSet<int> h3)
+        {
+            var h = new HashSet<int>();
+            foreach (var item in h1)
+            {
+                h.Add(item);
+            }
+            foreach (var item in h2)
+            {
+                h.Add(item);
+            }
+            foreach (var item in h3)
+            {
+                h.Add(item);
+            }
+            return h;
+        }
+
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
@@ -41,9 +61,9 @@ namespace TestLines
                 }
 
             Console.WriteLine(lines.Count);
-            foreach (var line in lines)
+            for (int i=0;i<lines.Count;i++)
             {
-                Console.WriteLine(line);
+                Console.WriteLine($"{i}:{lines[i]}");
 
             }
 
@@ -119,9 +139,36 @@ namespace TestLines
                         Console.WriteLine("===============");
 
 
+                        var h0a = Segment.ContainsPoint(p1, lines[i], true, points);
+                        var h0b = Segment.ContainsPoint(p1, lines[i], false, points);
+                        var h1 = Segment.ContainsPoint(p1, p2, points);
+                        var h2 = Segment.ContainsPoint(p2, p3, points);
+                        var h3a = Segment.ContainsPoint(p1, lines[l], true, points);
+                        var h3b = Segment.ContainsPoint(p1, lines[l], false, points);
 
+                        var hc = new HashSet<int>();
+                        foreach (var item in h1)
+                        {
+                            hc.Add(item);
+                        }
+                        foreach (var item in h2)
+                        {
+                            hc.Add(item);
+                        }
 
+                        var htest1 = Join(h0a, hc, h3a);
+                        var htest2 = Join(h0a, hc, h3b);
+                        var htest3 = Join(h0b, hc, h3a);
+                        var htest4 = Join(h0b, hc, h3b);
 
+                        if (htest1.Count == 9)
+                            Console.WriteLine("!!!!!!!!! htest1 !!!!!");
+                        if (htest2.Count == 9)
+                            Console.WriteLine("htest2");
+                        if (htest3.Count == 9)
+                            Console.WriteLine("htest3");
+                        if (htest4.Count == 9)
+                            Console.WriteLine("htest4");
 
                     }
                 }
